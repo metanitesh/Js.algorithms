@@ -10,7 +10,7 @@
 
 > **o(n2)** - it is a red alert complexity which genreally happens when nested loop is running on same data. if 10 record takes 5 second of processing 20 record will take 25 seconds
 
-e.g. poorly return sorting algoritm is o(n2) level complexity
+>e.g. poorly return sorting algoritm is o(n2) level complexity
 
 there are other time complexities like nlogn, !n which is not faced commonly by a pragmatic application developer. 
 
