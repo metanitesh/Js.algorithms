@@ -1,7 +1,9 @@
 /*
 
+Description:
 Print to the standard output a chessboard of size N,M where N is the number of columns and M is the number of rows.
-You have to print a 0 where the board is white and a 1 otherwise. Index (0,0) is white and it is the top left cell in the produced output.
+You have to print a 0 where the board is white and a 1 otherwise. 
+Index (0,0) is white and it is the top left cell in the produced output.
 
 Sample input:
 7,4
@@ -12,7 +14,8 @@ Sample output:
 0101010
 1010101
 
-reference - http://www.beatmycode.com/challenge/1/show
+reference - 
+http://www.beatmycode.com/challenge/1/show
 
 */
 
