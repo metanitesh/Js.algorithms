@@ -30,95 +30,94 @@ http://www.beatmycode.com/challenge/3/show
 
 */
 
-var input = 'O O O O X O O O O O\nX X O O O O O O X O\nO O O O O O O O O O\nO O O O O O O O O O\nO O O O O X O O O O'
 
 
-var rows = input.split("\n");
-var mineArray = [];
-
-for(var i=0, max= rows.length; i<max; i++){
-    mineArray.push(rows[i].split(" "));
-}
+(function() {
+  "use strict";
+  var input = 'O O O O X O O O O O\nX X O O O O O O X O\nO O O O O O O O O O\nO O O O O O O O O O\nO O O O O X O O O X';
 
 
-
-for(var i=0, max=mineArray.length; i<max; i++){
-    var currentRow = mineArray[i];
-    // console.log(currentRow);
-    for (var j=0, rowMax= currentRow.length; j<rowMax; j++){
-        // console.log(currentRow[j])
-        var priviousRow = mineArray[i-1] || [];
-        var nextRow = mineArray[i+1] || [];
-
-        var currentCell = currentRow[j]
-
-        var leftCell = currentRow[j-1] || undefined;
-        var rightCell = currentRow[j+1] || undefined;
-        var topCell = priviousRow[j] || undefined;
-        var bottomCell = nextRow[j] || undefined;
-
-        var topLeft = priviousRow[j-1] || undefined;
-        var topRight = priviousRow[j+1] || undefined;
-
-        var bottomLeft = nextRow[j-1] || undefined;
-        var bottomRight= nextRow[j+1] || undefined;
-
-        if(currentCell == "O"){
-
-        }
-        if(currentCell != "X"){
-            // currentRow[j] = 1;
-           
-           // console.log(leftCell);
-           if(leftCell != undefined && leftCell != "X" ) {
-              
-              if(leftCell == "O"){
-                currentRow[j-1] = 0; 
-              }
-               currentRow[j-1] = parseInt(currentRow[j-1]) + 1 ;
-               
-           }
-
-           if(leftCell != undefined && leftCell != "X" ) {
-              
-              if(leftCell == "O"){
-                currentRow[j-1] = 0; 
-              }
-               currentRow[j-1] = parseInt(currentRow[j-1]) + 1 ;
-               
-           }
-
-           // if(rightCell != undefined && rightCell != "X" ) {
-           //      currentRow[j+1];
-           //      console.log(currentRow)
-           // }
-
-           // if(topCell != undefined && topCell != "X" ) {
-           //      topCell += 1;
-           // }
-
-           // if(bottomCell != undefined && bottomCell != "X" ) {
-           //      bottomCell += 1;
-           // }
-
-           // if(topLeft != undefined && topLeft != "X" ) {
-           //      topLeft += 1;
-           // }
-
-           // if(topRight != undefined && topRight != "X" ) {
-           //      topRight += 1;
-           // }
-
-           // if(bottomLeft != undefined && bottomLeft != "X" ) {
-           //      bottomLeft += 1;
-           // }
-
-           // if(bottomRight != undefined && bottomRight != "X" ) {
-           //      bottomRight += 1;
-           // }
-
-        }    
+  var isMineOutOfBoundaries = function(mineArray, i, j) {
+    if (i >= mineArray.length || i < 0) {
+      return true
     }
-    
-}
-console.log(mineArray)
+
+    if (j >= mineArray[i].length || j < 0) {
+      return true
+    }
+
+    return false;
+  }
+
+  var updateMineAt = function(mineArray, i, j) {
+
+    if (isMineOutOfBoundaries(mineArray, i, j)) {
+      return
+    }
+
+    if (mineArray[i][j] != "X" || mineArray[i][j] == undefined) {
+      if (mineArray[i][j] == "O") {
+        mineArray[i][j] = 1;
+      } else {
+        mineArray[i][j] += 1;
+      }
+    }
+  }
+
+  var createMineArrayFromInput = function(input) {
+
+    var mineArray = [];
+    var mineRows = input.split("\n");
+
+    for (var i = 0, max = mineRows.length; i < max; i++) {
+      mineArray.push(mineRows[i].split(" "));
+    }
+
+    return mineArray;
+
+  }
+
+
+  var updateAllMines = function(mineArray) {
+    for (var i = 0, max = mineArray.length; i < max; i++) {
+      for (var j = 0, maxRow = mineArray[i].length; j < maxRow; j++) {
+        if (mineArray[i][j] == "O") {
+          mineArray[i][j] = 0;
+        }
+        if (mineArray[i][j] == "X") {
+          //right
+          updateMineAt(mineArray, i, j + 1);
+          //left
+          updateMineAt(mineArray, i, j - 1);
+          //top
+          updateMineAt(mineArray, i - 1, j);
+          //bottom
+          updateMineAt(mineArray, i + 1, j);
+          //topleft
+          updateMineAt(mineArray, i - 1, j - 1);
+          //topright
+          updateMineAt(mineArray, i - 1, j + 1);
+          //bottomleft
+          updateMineAt(mineArray, i + 1, j - 1);
+          //bottomRight
+          updateMineAt(mineArray, i + 1, j + 1);
+        }
+      }
+ 
+    }
+  }
+
+
+  var convertOutputFromMineArray = function(mineArray) {
+    for (var i = 0, max = mineArray.length; i < max; i++) {
+      mineArray[i] = mineArray[i].join(" ")
+    }
+
+    return mineArray.join("\n");
+  }
+
+  var mineArray = createMineArrayFromInput(input);
+  updateAllMines(mineArray);
+  console.log(convertOutputFromMineArray(mineArray))
+
+}());
