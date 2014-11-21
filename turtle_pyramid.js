@@ -29,50 +29,15 @@ Sample output:
 reference - http://www.beatmycode.com/challenge/4/show
 */
 
+var input = [4,1,3,2,5];
+var length = input.length;
 
-
-
-
-var input = [5, 2, 3, 4, 0];
-var input2 = [5, 2, 3, 4, 0];
-
-
-var startIndex = 0;
-
-var swap = function(input, i) {
-
-  var temp = input[i];
-  input[i] = input[i - 1];
-  input[i - 1] = temp;
-
-  i = i - 1;
-
-  if (input[i] > input[i - 1] && i > 0) {
-    swap(input, i)
-  }
-
+for(var i=length-1; i>=0; i--){
+    if(input[i] == length){
+        length--
+    }
 }
 
-for (var i = 1, max = input.length; i < max; i++) {
-
-  if (input[i] > input[i - 1]) {
-
-
-    swap(input, i);
-  }
-}
-
-
-for (var i = 0, max = input2.length; i < max; i++) {
-  if (input2[i] != input[i]) {
-    startIndex = i
-    break
-  }
-  ;
-}
-
-
-if (startIndex) {
-
-  console.log(input.slice(startIndex))
+for(var i=0; i<length; i++){
+    console.log(length-i)
 }
