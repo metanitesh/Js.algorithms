@@ -13,33 +13,58 @@ How many circular primes are there below N if 1 <= N <= 1000000?
 
 */
 
+function isPrime(n) {
 
-var input = 10;
-
-var findPrimes = function(input) {
-  
-  var result = [2];
-  var circularPrime = [];
-  for (var i = 3; i <= input; i++) {
-    for(var j=0; j<result.length; j++){
-        var isPrime = true;
-        
-        if(i % result[j] == 0){
-            isPrime = false;
-            break;
-        }
-
-    }
-    if(isPrime){
-
-        result.push(i)    
-
-    }
-     
+  if (n % 2 === 0) {
+    return n === 2;
   }
-  return result
+
+  for (var i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) return false;
+  }
+
+  return n;
+}
+;
+
+
+
+function isCircularPrime(n) {
+
+
+  if (!isPrime(n)) {
+    return false;
+  }
+
+  var reverse = parseInt(n.toString().split("").reverse().join(""));
+
+  if (!isPrime(reverse)) {
+    return false
+  }
+
+
+
+  return true
+
 }
 
-var primes = (findPrimes(100));
 
-console.log(primes)
+function findCircularPrimesInRange(input) {
+
+  var counter = 0;
+
+  if (input < 2) {
+    return 0
+  }
+
+  for (var i = 2; i < input + 1; i++) {
+    if (isCircularPrime(i)) {
+      counter++;
+    }
+  }
+
+  return counter;
+}
+
+
+console.log(findCircularPrimesInRange(100))
