@@ -21,7 +21,6 @@
 
 
 
-
 input_array = [2,12,1012]
 output = []
 
