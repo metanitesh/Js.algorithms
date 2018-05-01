@@ -29,15 +29,28 @@ Sample output:
 reference - http://www.beatmycode.com/challenge/4/show
 */
 
-var input = [4,1,3,2,5];
+var input = [4, 1, 3, 2, 5];
 var length = input.length;
+var move = 0;
+var k = 1;
 
-for(var i=length-1; i>=0; i--){
-    if(input[i] == length){
-        length--
+var j = 0;
+while (j < length) {
+	
+    for (var i = length - 1; i > k; i--) {
+    	console.log(input[i], input[i - 1])
+        if (input[i] > input[i - 1]) {
+            var temp = input[i]
+            input[i] = input[i - 1]
+            input[i - 1] = temp
+            move++;
+            
+        }
     }
+    
+    k++;
+    j++;
 }
 
-for(var i=0; i<length; i++){
-    console.log(length-i)
-}
+console.log(input, move)
+
