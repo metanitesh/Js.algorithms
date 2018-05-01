@@ -38,7 +38,7 @@ var j = 0;
 while (j < length) {
 	
     for (var i = length - 1; i > k; i--) {
-    	console.log(input[i], input[i - 1])
+    	
         if (input[i] > input[i - 1]) {
             var temp = input[i]
             input[i] = input[i - 1]
