@@ -17,7 +17,5 @@ function transform(input) {
   return input;  
 }
 
-
-
 const result = transform(inputArray);
 console.log(result);
