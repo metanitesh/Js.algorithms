@@ -1,64 +1,65 @@
 // you can write to stdout for debugging purposes, e.g.
 // console.log('this is a debug message');
 
-function solution(A) {
-  // write your code in JavaScript (Node.js 8.9.4)
+function solution(A) { 
 
-  const len = A.length;
-  let maxTriplet;
+  let B = A.sort((a, b) => a - b);
 
-  for (let i=0 ; i<len ; i++) {
-    
-    let a1 =  A[i];
-    let a2;
-    let a3;
+  
+  const len = B.length;
+  let maxNegative = Number.NEGATIVE_INFINITY;
+  let maxPositive = Number.NEGATIVE_INFINITY;
+  if(A[0] < 0 && A[1] < 0){
+    maxNegative = A[0] * A[1] * A[len-1]
+  }
 
-    for(j=i; j<len; j++){
-
-        if(a2 !== undefined && a3 !== undefined){
-          break;
-        }
-
-        if(a2 === undefined){
-          if(A[j] > a1){
-            a2 = A[j]
-          }
-
-        }else if( a2 !== undefined && a3 === undefined){
-          if(A[j] > a2){
-            a3 = A[j]
-          }
-        }
-
-        
-        
-    }
-
-    const sum = a1 * a2 * a3;
-
-
-
-    if(maxTriplet === undefined){
-      maxTriplet = sum;
-    }
-
-    if(sum > maxTriplet){
-      maxTriplet = sum;
-    }
-
+  
+  maxPositive = A[len-1]* A[len-2]* A[len-3];
+  
+  
+  
     
 
-    
+  if(maxNegative > maxPositive){
+    return maxNegative;
+  }else{
+    return maxPositive;
   }
   
-  
-  return maxTriplet;
-  //loop
-
-  //find next two and multipication store in the last max
 
 
 
+
+  // const len = A.length;
+  // let maxProduct = Number.NEGATIVE_INFINITY;
+  // for ( let i=0 ; i<len ; i++) {
+    
+
+  //   for(let j= i+1; j<len -1 ; j++){
+
+  //     for(let k = j+1; k<len; k++){
+
+           
+  //          let prodcut = A[i]*A[j]*A[k];
+  //          if(prodcut > maxProduct){
+  //            maxProduct = prodcut;
+  //          }
+          
+
+
+  //     } 
+      
+
+      
+  //   }
+
+
+    
+  // }
+
+  // return maxProduct;
 }
 
-console.log(solution([-2, -1, 0]));
+
+
+console.log(solution([-3, 1, 2, -2, 5, 6]));
